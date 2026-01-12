@@ -1,2 +1,4 @@
-# prog-str-raziel-candia-2c
-trabajos
+
+
+
+este es el repositorio del cuatrimestre, lo vamos a usar para guardar todos los trabajos
