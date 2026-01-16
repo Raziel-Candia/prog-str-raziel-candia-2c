@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c3c92d13-aeec-44a9-9d38-17daf65b840e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../MergeWithConflict/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MergeWithConflict/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MergeWithConflict/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MergeWithConflict/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +48,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "Main",
+    "git-widget-placeholder": "Merging Main",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
@@ -75,7 +76,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1768592268445</updated>
-      <workItem from="1768592270246" duration="486000" />
+      <workItem from="1768592270246" duration="881000" />
     </task>
     <servers />
   </component>
