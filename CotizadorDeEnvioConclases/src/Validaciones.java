@@ -1,24 +1,26 @@
 public class Validaciones {
 
-    // para checar si esta en el limite
+    // Checamos que el número decimal esté entre los límites que nos pasen
     public static boolean esDoubleEnRango(double valor, double minimo, double maximo) {
-        // para ver si es mayoor o igual
+        // Tiene que ser mayor o igual al mínimo Y menor o igual al máximo
         boolean estaDentro = (valor >= minimo) && (valor <= maximo);
         return estaDentro;
     }
 
 
-    // para ver si esta en el limite que pide
+    // Valida que el número entero no se salga del rango permitido
     public static boolean esIntEnRango(int valor, int min, int max) {
-        // esta es para los enteros la otra era de decimales
+        // Misma idea que con los decimales, pero para enteros
         return valor >= min && valor <= max;
     }
 
 
-    // aqui metemos un verdadero o falso pero en inglés, un booleano
+    // Verificamos que la entrada sea un booleano válido (solo true o false, sin importar mayúsculas)
     public static boolean esBooleanValido(String entrada) {
+        // Primero quitamos espacios de más por si el usuario los puso sin querer
+        String entradaLimpia = entrada.trim();
 
-        // por si ponen mayusculas y minusculas para que no marque error
+        // Comparamos sin distinguir mayúsculas/minúsculas
         if (entradaLimpia.equalsIgnoreCase("true") || entradaLimpia.equalsIgnoreCase("false")) {
             return true;
         } else {

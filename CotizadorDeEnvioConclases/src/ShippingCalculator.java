@@ -1,55 +1,35 @@
 public class ShippingCalculator {
-
-    // para ver el costo antes del IVA
-    public double calcularSubtotal(double pesoKg, int distanciaKm, int tipoServicio, boolean esZonaRemota) {
-        // los costos segun el tipo de envio
-        double costoBase;
-        if (tipoServicio == 1) {
-            costoBase = 50; // estandar
-        } else {
-            costoBase = 90; // expres
+    // Calcular el subtotal del envío según las reglas del negocio
+    public double calcularSubtotal(double pesoKg, int distanciaKm, int tipoServicio, boolean zonaRemota) {
+        double subtotal = 0;
+        // Costo base según el tipo de servicio
+        if (tipoServicio == 1) { // Estándar
+            subtotal = 50;
+        } else { // Express
+            subtotal = 90;
         }
-
-        // este va a ser el costo por kilo
-        double costoPorPeso = pesoKg * 12;
-
-        // este es el costo de la distancia depende cuanto
-        double costoPorDistancia;
+        // Costo adicional por peso
+        subtotal = subtotal + (pesoKg * 12);
+        // Costo adicional por distancia
         if (distanciaKm <= 50) {
-            costoPorDistancia = 20; // este es el precio mas bajo
-        }
-        else if (distanciaKm <= 200) {
-            costoPorDistancia = 60; // este es el de 51 kilometros
-        }
-        else {
-            costoPorDistancia = 120; // y este es el mas caro
-        }
-
-        // aqui sumamos toso
-        double subtotalBase = costoBase + costoPorPeso + costoPorDistancia;
-
-        // aqui tomamos en cuenta si es zona remota u le agregamos lo que pide
-        double subtotalFinal;
-        if (esZonaRemota) {
-            subtotalFinal = subtotalBase * 1.10;
+            subtotal = subtotal + 20;
+        } else if (distanciaKm <= 200) {
+            subtotal = subtotal + 60;
         } else {
-            subtotalFinal = subtotalBase;
+            subtotal = subtotal + 120;
         }
-
-        return subtotalFinal;
+        // Recargo si la zona es remota
+        if (zonaRemota == true) {
+            subtotal = subtotal * 1.10;
+        }
+        return subtotal;
     }
-
-
-    // aqui calculmpos el iva
+    // Calcula el IVA a partir del subtotal
     public double calcularIVA(double subtotal) {
-        double ivaCalculado = subtotal * 0.16;
-        return ivaCalculado;
+        return subtotal * 0.16;
     }
-
-
-    // aqui ponemos el subtotal y el iva
+    // Calcula el total sumando subtotal e IVA
     public double calcularTotal(double subtotal, double iva) {
-        // y puees aqui solo lo simas y ya
         return subtotal + iva;
     }
 }

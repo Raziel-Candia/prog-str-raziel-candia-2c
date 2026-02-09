@@ -1,125 +1,38 @@
 import java.util.Scanner;
 public class Main {
-
     public static void main(String[] args) {
-
-        Scanner scannerEntrada = new Scanner(System.in);
-
-        double pesoPaquete = leerDoubleEnRango(scannerEntrada, "Ingresa el peso del paquete en kg (0.1 a 50.0): ", 0.1, 50.0);
-        int distanciaEnvio = leerIntEnRango(scannerEntrada, "Ingresa la distancia del envío en km (1 a 2000): ", 1, 2000);
-        int tipoServicio = leerIntEnRango(scannerEntrada, "¿Qué servicio quieres? (1=Estándar, 2=Express): ", 1, 2);
-        boolean zonaRemota = leerBoolean(scannerEntrada, "¿El destino es zona remota? (escribe true o false): ");
-
-        ShippingCalculator calculadoraEnvios = new ShippingCalculator();
-        double subtotalSinIVA = calculadoraEnvios.calcularSubtotal(pesoPaquete, distanciaEnvio, tipoServicio, zonaRemota);
-        double impuestoIVA = calculadoraEnvios.calcularIVA(subtotalSinIVA);
-        double precioFinal = calculadoraEnvios.calcularTotal(subtotalSinIVA, impuestoIVA);
-
-        mostrarTicket(tipoServicio, pesoPaquete, distanciaEnvio, zonaRemota, subtotalSinIVA, impuestoIVA, precioFinal);
-
-        scannerEntrada.close();
-    }
-
-
-    // para los decimaales
-    public static double leerDoubleEnRango(Scanner sc, String mensaje, double limiteMin, double limiteMax) {
-        double valorIngresado;
-
-        do {
-            System.out.print(mensaje);
-
-            // Primero me aseguro de que sea un número decimal
-            while (!sc.hasNextDouble()) {
-                System.out.println("¡Uy! Eso no es un número decimal válido.");
-                sc.next(); // Descarto lo que el usuario escribió mal
-                System.out.print(mensaje); // Vuelvo a pedir el dato
-            }
-
-            valorIngresado = sc.nextDouble();
-
-            // Checo aver si esta dentro de las validaciones
-            if (!Validaciones.esDoubleEnRango(valorIngresado, limiteMin, limiteMax)) {
-                System.out.printf("Error: El valor tiene que estar entre %.1f y %.1f kg.%n", limiteMin, limiteMax);
-            }
-
-        } while (!Validaciones.esDoubleEnRango(valorIngresado, limiteMin, limiteMax));
-
-        return valorIngresado;
-    }
-
-
-    public static int leerIntEnRango(Scanner sc, String mensaje, int min, int max) {
-        int valor;
-
-        do {
-            System.out.print(mensaje);
-
-            // numeros enteros
-            while (!sc.hasNextInt()) {
-                System.out.println("Error: Eso no es un número entero.");
-                sc.next();
-                System.out.print(mensaje);
-            }
-
-            valor = sc.nextInt();
-
-            // chheco rango
-            if (!Validaciones.esIntEnRango(valor, min, max)) {
-                System.out.printf("No, ese valor no sirve – tiene que estar entre %d y %d.%n", min, max);
-            }
-
-        } while (!Validaciones.esIntEnRango(valor, min, max));
-
-        return valor;
-    }
-
-
-    // aqui es para verdadero y falso aqui lo lee
-    public static boolean leerBoolean(Scanner sc, String mensaje) {
-        boolean resultado = false;
-        boolean entradaEsValida = false;
-
-        do {
-            System.out.print(mensaje);
-            String textoIngresado = sc.next();
-
-            // Checo si lo que escribió es válido
-            if (Validaciones.esBooleanValido(textoIngresado)) {
-                // este nos dijeron que es para convertir mayusculaas y minuscukas
-                resultado = Boolean.parseBoolean(textoIngresado.trim().toLowerCase());
-                entradaEsValida = true;
-            } else {
-                System.out.println("¡Cuidado! Solo puedes escribir 'true' o 'false' (sin comillas).");
-            }
-
-        } while (!entradaEsValida);
-
-        return resultado;
-    }
-
-
-
-    public static void mostrarTicket(int tipoServicio, double peso, int distancia, boolean esRemota,
-                                     double subtotal, double iva, double total) {
-
-        String nombreServicio;
+        // Se crea el objeto Scanner para leer datos del usuario
+        Scanner sc = new Scanner(System.in);
+        // Datos de entrada
+        System.out.print("Ingresa el peso del paquete: ");
+        double pesoKg = sc.nextDouble();
+        System.out.print("Ingresa la distancia en km: ");
+        int distanciaKm = sc.nextInt();
+        System.out.print("Tipo de servicio (1=Estandar, 2=Rapido): ");
+        int tipoServicio = sc.nextInt();
+        System.out.print("¿Es zona remota? (true/false): ");
+        boolean zonaRemota = sc.nextBoolean();
+        // Se crea el objeto que realiza los cálculos
+        ShippingCalculator calc = new ShippingCalculator();
+        // Llamada a los métodos de cálculo
+        double subtotal = calc.calcularSubtotal(pesoKg, distanciaKm, tipoServicio, zonaRemota);
+        double iva = calc.calcularIVA(subtotal);
+        double total = calc.calcularTotal(subtotal, iva);
+        // Determinar el texto del servicio para mostrarlo
+        String servicio;
         if (tipoServicio == 1) {
-            nombreServicio = "Estándar";
+            servicio = "Estandar";
         } else {
-            nombreServicio = "Express";
+            servicio = "Express";
         }
-
-        String textoZona = esRemota ? "Sí" : "No";
-
-        // aqui pues haces el diseño para que se vea bonito
-        System.out.println("------- ticket ---------");
-        System.out.printf(" Servicio elegido: %s%n", nombreServicio);
-        System.out.printf(" Peso del paquete: %.2f kg%n", peso);
-        System.out.printf(" Distancia a entregar: %d km%n", distancia);
-        System.out.printf(" Zona remota: %s%n", textoZona);
-        System.out.printf(" Subtotal (antes de IVA): $%.2f%n", subtotal);
-        System.out.printf(" IVA (16%%): $%.2f%n", iva);
-        System.out.printf(" TOTAL A PAGAR: $%.2f%n", total);
-        System.out.println("-------------------------");
+        // Impresión del ticket
+        System.out.println("\n--- TICKET ---");
+        System.out.println("Servicio: " + servicio);
+        System.out.println("Peso: " + pesoKg + " kg");
+        System.out.println("Distancia: " + distanciaKm + " km");
+        System.out.println("Zona remota: " + zonaRemota);
+        System.out.println("Subtotal: $" + subtotal);
+        System.out.println("IVA: $" + iva);
+        System.out.println("Total: $" + total);
     }
 }
