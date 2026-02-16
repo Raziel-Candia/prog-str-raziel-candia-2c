@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ControlIfElseRazielCandia/ControlIfElseRazielCandia.iml" filepath="$PROJECT_DIR$/ControlIfElseRazielCandia/ControlIfElseRazielCandia.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ControlSwitchRazielCandia/ControlSwitchRazielCandia.iml" filepath="$PROJECT_DIR$/ControlSwitchRazielCandia/ControlSwitchRazielCandia.iml" />
+      <module fileurl="file://$PROJECT_DIR$/proyecto01/proyecto01.iml" filepath="$PROJECT_DIR$/proyecto01/proyecto01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/repositorio clonado.iml" filepath="$PROJECT_DIR$/.idea/repositorio clonado.iml" />
+    </modules>
+  </component>
+</project>
