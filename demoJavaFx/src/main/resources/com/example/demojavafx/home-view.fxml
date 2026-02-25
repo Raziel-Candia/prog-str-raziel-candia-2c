@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.demojavafx.controllers.HomeControllers"
+            prefHeight="400.0" prefWidth="600.0">
+<padding>
+        <Insets bottom="20" top="20" right="20" left="20"/>
+</padding>
+    <Label text=" bienvenido a home"/>
+    <Button text="ir al form" onAction="#onGoToForm"/>
+
+
+
+</AnchorPane>
