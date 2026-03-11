@@ -1,11 +1,5 @@
 ### IntelliJ IDEA ###
-<<<<<<< HEAD
-.idea/
 out/
-*.iml
-=======
-out/
->>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
 !**/src/main/**/out/
 !**/src/test/**/out/
 .kotlin

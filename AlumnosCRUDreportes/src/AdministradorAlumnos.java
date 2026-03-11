@@ -1,11 +1,19 @@
 import java.util.Scanner;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
 public class AdministradorAlumnos {
     private static final int MAX_ALUMNOS = 25;
     private Alumno[] alumnos;
     private int contadorAlumnos; // aqui es para saber cuantos aumnos llevas
     private Scanner scanner;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
     // aqui es el constructor
     public AdministradorAlumnos() {
         alumnos = new Alumno[MAX_ALUMNOS];
@@ -14,6 +22,11 @@ public class AdministradorAlumnos {
     }
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
     public void iniciar() {
         int opcion;
         do {
@@ -29,6 +42,10 @@ public class AdministradorAlumnos {
             opcion = scanner.nextInt();
             scanner.nextLine(); // aqui es para limpiar
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
             switch (opcion) {
                 case 1:
                     altaAlumno();
@@ -58,6 +75,10 @@ public class AdministradorAlumnos {
         scanner.close();
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
     // aqui es para las altas de los alumnos
     private void altaAlumno() {
         if (contadorAlumnos >= MAX_ALUMNOS) {
@@ -65,6 +86,10 @@ public class AdministradorAlumnos {
             return;
         }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
         // aqui es para que puedas validar el id
         int id;
         do {
@@ -73,6 +98,10 @@ public class AdministradorAlumnos {
             if (id <= 0) System.out.println("el ID debe ser mayor a 0");
         } while (id <= 0);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
         // aqui es por si se repite el id
         if (buscarIndicePorId(id) != -1) {
             System.out.println("ID ya existe");
@@ -80,6 +109,10 @@ public class AdministradorAlumnos {
         }
         scanner.nextLine();
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
         // aqui es para validar el nombre
         String nombre;
         do {
@@ -88,6 +121,10 @@ public class AdministradorAlumnos {
             if (nombre.isEmpty()) System.out.println("Nombre no puede estar vacio");
         } while (nombre.isEmpty());
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
         //aqui es para validar el promedio
         double promedio;
         do {
@@ -96,12 +133,20 @@ public class AdministradorAlumnos {
             if (promedio < 0 || promedio > 10) System.out.println("Promedio debe estar entre 0 y 10");
         } while (promedio < 0 || promedio > 10);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
         // aqui es para agregar alumnos
         alumnos[contadorAlumnos] = new Alumno(id, nombre, promedio);
         contadorAlumnos++;
         System.out.println("Alumno dado de alta");
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
     // aqui es para buscar el id pero no se permiten numeros negativos
     private int buscarIndicePorId(int id) {
         for (int i = 0; i < contadorAlumnos; i++) {
@@ -112,12 +157,20 @@ public class AdministradorAlumnos {
         return -1;
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
     // aqui es para buscar alumnos pero con su id
     private void buscarPorId() {
         System.out.print("coloca el ID a buscar: ");
         int id = scanner.nextInt();
         int indice = buscarIndicePorId(id);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
         if (indice == -1 || !alumnos[indice].isActivo()) {
             System.out.println("Alumno no encontrado o no está activo");
         } else {
@@ -126,17 +179,29 @@ public class AdministradorAlumnos {
         }
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
     // aqui es para actualizar promedio
     private void actualizarPromedio() {
         System.out.print("coloca el ID del alumno: ");
         int id = scanner.nextInt();
         int indice = buscarIndicePorId(id);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
         if (indice == -1 || !alumnos[indice].isActivo()) {
             System.out.println("Alumno no encontrado");
             return;
         }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
         // aqui es para que ya este el nuevo promedio
         double nuevoPromedio;
         do {
@@ -145,16 +210,28 @@ public class AdministradorAlumnos {
             if (nuevoPromedio < 0 || nuevoPromedio > 10) System.out.println("Promedio debe estar entre 0 y 10");
         } while (nuevoPromedio < 0 || nuevoPromedio > 10);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
         alumnos[indice].setPromedio(nuevoPromedio);
         System.out.println("Promedio actualizado");
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
     // aqui es para dar de baja
     private void bajaLogica() {
         System.out.print("coloca el ID del alumno: ");
         int id = scanner.nextInt();
         int indice = buscarIndicePorId(id);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
         if (indice == -1) {
             System.out.println("Alumno no encontrado");
         } else if (!alumnos[indice].isActivo()) {
@@ -165,6 +242,10 @@ public class AdministradorAlumnos {
         }
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
     // aqui vas a listar los alumnos activos
     private void listarActivos() {
         System.out.println("alumnos activos");
@@ -179,6 +260,10 @@ public class AdministradorAlumnos {
         if (!hayActivos) System.out.println("No hay alumnos activos");
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
     // aqui vas a generar los reportes
     private void generarReportes() {
         int totalActivos = 0;
@@ -187,6 +272,10 @@ public class AdministradorAlumnos {
         Alumno menorPromedio = null;
         int contadorMayoresOcho = 0;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
         // aqui vas a poner a los alumnos para el reporte
         for (int i = 0; i < contadorAlumnos; i++) {
             if (alumnos[i].isActivo()) {
@@ -194,16 +283,28 @@ public class AdministradorAlumnos {
                 totalActivos++;
                 sumaPromedios += a.getPromedio();
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
                 //aqui va el promedio mayor
                 if (mayorPromedio == null || a.getPromedio() > mayorPromedio.getPromedio()) {
                     mayorPromedio = a;
                 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
                 // y aqui va el promedio menor
                 if (menorPromedio == null || a.getPromedio() < menorPromedio.getPromedio()) {
                     menorPromedio = a;
                 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
                 // aqui es para contar el promedio
                 if (a.getPromedio() >= 8.0) {
                     contadorMayoresOcho++;
@@ -211,6 +312,10 @@ public class AdministradorAlumnos {
             }
         }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
         // aqui pues ya es el reporte
         System.out.println("reportes");
         if (totalActivos == 0) {
@@ -218,12 +323,20 @@ public class AdministradorAlumnos {
             return;
         }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
         System.out.println("Promedio general de activos: " + String.format("%.2f", sumaPromedios / totalActivos));
         System.out.println("Alumno con mayor promedio: ID " + mayorPromedio.getId() + ", Nombre " + mayorPromedio.getNombre() + ", Promedio " + mayorPromedio.getPromedio());
         System.out.println("Alumno con menor promedio: ID " + menorPromedio.getId() + ", Nombre " + menorPromedio.getNombre() + ", Promedio " + menorPromedio.getPromedio());
         System.out.println("Alumnos activos con promedio >=8.0: " + contadorMayoresOcho);
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
     // aqui pues pones el metodo main para que se ejecute el programa
     public static void main(String[] args) {
         AdministradorAlumnos admin = new AdministradorAlumnos();

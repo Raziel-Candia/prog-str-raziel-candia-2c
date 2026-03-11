@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/ControlIfElseRazielCandia/ControlIfElseRazielCandia.iml" filepath="$PROJECT_DIR$/ControlIfElseRazielCandia/ControlIfElseRazielCandia.iml" />
       <module fileurl="file://$PROJECT_DIR$/ControlSwitchRazielCandia/ControlSwitchRazielCandia.iml" filepath="$PROJECT_DIR$/ControlSwitchRazielCandia/ControlSwitchRazielCandia.iml" />
       <module fileurl="file://$PROJECT_DIR$/proyecto01/proyecto01.iml" filepath="$PROJECT_DIR$/proyecto01/proyecto01.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/repositorio clonado.iml" filepath="$PROJECT_DIR$/.idea/repositorio clonado.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/programa-str-raziel-candia-2c-nuevo.iml" filepath="$PROJECT_DIR$/programa-str-raziel-candia-2c-nuevo.iml" />
+>>>>>>> beab648051bd2c3e91ca4e4faeb27d2c37b5d652
     </modules>
   </component>
 </project>
