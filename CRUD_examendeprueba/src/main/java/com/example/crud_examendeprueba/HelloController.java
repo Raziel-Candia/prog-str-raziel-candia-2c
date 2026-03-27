@@ -7,151 +7,144 @@ import java.util.List;
 
 public class HelloController {
 
-    @FXML
-    private TextField txtNombre;
-    @FXML
-    private TextField txtTelefono;
-    @FXML
-    private ComboBox<String> cmbParentesco;
-    @FXML
-    private ListView<Contacto> lvContactos;
-
+    @FXML private TextField txtNombre;
+    @FXML private TextField txtTelefono;
+    @FXML private ComboBox<String> cmbParentesco;
+    @FXML private ListView<Contacto> listViewContactos;
 
     private List<Contacto> listaContactos;
-    private final String[] ARREGLO_PARENTESCOS = {"Padre", "Madre", "Hermano", "Hermana", "Abuelo", "Abuela", "Tío", "Tía"};
-
 
     @FXML
     public void initialize() {
         listaContactos = new ArrayList<>();
-        cargarOpcionesParentesco();
-    }
+        cargarParentescos();
 
 
-    private void cargarOpcionesParentesco() {
-        cmbParentesco.getItems().addAll(ARREGLO_PARENTESCOS);
-    }
-
-
-    private boolean validarDatos(String nombre, String telefono, String parentesco, boolean esActualizacion) {
-        if (nombre.isEmpty()) {
-            mostrarMensaje("Error", "El nombre no puede estar vacío");
-            return false;
-        }
-        if (telefono.isEmpty() || !telefono.matches("\\d{10}")) {
-            mostrarMensaje("Error", "El teléfono debe tener exactamente 10 dígitos");
-            return false;
-        }
-        if (parentesco == null || parentesco.isEmpty()) {
-            mostrarMensaje("Error", "Debe seleccionar un parentesco");
-            return false;
-        }
-
-        if (!esActualizacion) {
-            for (Contacto c : listaContactos) {
-                if (c.getNombre().equalsIgnoreCase(nombre)) {
-                    mostrarMensaje("Error", "Ya existe un contacto con ese nombre");
-                    return false;
-                }
+        listViewContactos.getSelectionModel().selectedItemProperty().addListener((obs, viejo, nuevo) -> {
+            if (nuevo != null) {
+                txtNombre.setText(nuevo.getNombre());
+                txtTelefono.setText(nuevo.getTelefono());
+                cmbParentesco.setValue(nuevo.getParentesco());
             }
-        }
-        return true;
+        });
     }
 
+    private void cargarParentescos() {
+        String[] opciones = {"Padre", "Madre", "Hermano", "Hermana", "Abuelo", "Abuela", "Tío", "Tía"};
+        cmbParentesco.getItems().addAll(opciones);
+    }
 
     @FXML
-    private void agregarContacto() {
+    void agregarContacto() {
+        if (!validarEntradas()) return;
+
         String nombre = txtNombre.getText().trim();
-        String telefono = txtTelefono.getText().trim();
-        String parentesco = cmbParentesco.getValue();
-
-        if (validarDatos(nombre, telefono, parentesco, false)) {
-            listaContactos.add(new Contacto(nombre, telefono, parentesco));
-            actualizarListView();
-            limpiarCampos();
-            mostrarMensaje("Éxito", "Contacto agregado correctamente");
-        }
-    }
-
-
-    @FXML
-    private void buscarContacto() {
-        String nombreBuscado = txtNombre.getText().trim();
-        if (nombreBuscado.isEmpty()) {
-            mostrarMensaje("Advertencia", "Ingrese un nombre para buscar");
+        if (buscarPorNombre(nombre) != null) {
+            mostrarAlerta("Error", "Ya existe un contacto con ese nombre.");
             return;
         }
 
-        for (Contacto c : listaContactos) {
-            if (c.getNombre().equalsIgnoreCase(nombreBuscado)) {
-                txtNombre.setText(c.getNombre());
-                txtTelefono.setText(c.getTelefono());
-                cmbParentesco.setValue(c.getParentesco());
-                return;
-            }
-        }
-        mostrarMensaje("Información", "No se encontró el contacto");
+        Contacto nuevo = new Contacto(nombre, txtTelefono.getText().trim(), cmbParentesco.getValue());
+        listaContactos.add(nuevo);
+
+        actualizarListView();
         limpiarCampos();
     }
 
-
     @FXML
-    private void actualizarContacto() {
-        String nombreActual = txtNombre.getText().trim();
-        String nuevoTelefono = txtTelefono.getText().trim();
-        String nuevoParentesco = cmbParentesco.getValue();
-
-        if (validarDatos(nombreActual, nuevoTelefono, nuevoParentesco, true)) {
-            for (Contacto c : listaContactos) {
-                if (c.getNombre().equalsIgnoreCase(nombreActual)) {
-                    c.setTelefono(nuevoTelefono);
-                    c.setParentesco(nuevoParentesco);
-                    actualizarListView();
-                    limpiarCampos();
-                    mostrarMensaje("Éxito", "Contacto actualizado correctamente");
-                    return;
-                }
-            }
-            mostrarMensaje("Error", "No se encontró el contacto para actualizar");
-        }
-    }
-
-
-    @FXML
-    private void eliminarContacto() {
-        String nombreEliminar = txtNombre.getText().trim();
-        if (nombreEliminar.isEmpty()) {
-            mostrarMensaje("Advertencia", "Ingrese o busque un contacto para eliminar");
+    void buscarContacto() {
+        String nombre = txtNombre.getText().trim();
+        if (nombre.isEmpty()) {
+            mostrarAlerta("Advertencia", "Ingrese un nombre para buscar.");
             return;
         }
 
-        for (Contacto c : listaContactos) {
-            if (c.getNombre().equalsIgnoreCase(nombreEliminar)) {
-                listaContactos.remove(c);
-                actualizarListView();
-                limpiarCampos();
-                mostrarMensaje("Éxito", "Contacto eliminado correctamente");
-                return;
-            }
+        Contacto encontrado = buscarPorNombre(nombre);
+        if (encontrado != null) {
+            txtTelefono.setText(encontrado.getTelefono());
+            cmbParentesco.setValue(encontrado.getParentesco());
+            listViewContactos.getSelectionModel().select(encontrado);
+        } else {
+            mostrarAlerta("No encontrado", "No se encontró el contacto.");
+            limpiarCampos();
+            txtNombre.setText(nombre);
         }
-        mostrarMensaje("Error", "No se encontró el contacto para eliminar");
     }
 
+    @FXML
+    void actualizarContacto() {
+        String nombre = txtNombre.getText().trim();
+        Contacto existente = buscarPorNombre(nombre);
+
+        if (existente == null) {
+            mostrarAlerta("Error", "El contacto no existe.");
+            return;
+        }
+
+        if (!validarEntradas()) return;
+
+        existente.setTelefono(txtTelefono.getText().trim());
+        existente.setParentesco(cmbParentesco.getValue());
+
+        actualizarListView();
+        mostrarAlerta("Éxito", "Contacto actualizado.");
+    }
 
     @FXML
-    private void limpiarCampos() {
+    void eliminarContacto() {
+        String nombre = txtNombre.getText().trim();
+        Contacto existente = buscarPorNombre(nombre);
+
+        if (existente != null) {
+            listaContactos.remove(existente);
+            actualizarListView();
+            limpiarCampos();
+        } else {
+            mostrarAlerta("Error", "No se encontró el contacto para eliminar.");
+        }
+    }
+
+    @FXML
+    void limpiarCampos() {
         txtNombre.clear();
         txtTelefono.clear();
-        cmbParentesco.setValue(null);
+        cmbParentesco.getSelectionModel().clearSelection();
+        listViewContactos.getSelectionModel().clearSelection();
     }
 
 
     private void actualizarListView() {
-        lvContactos.getItems().clear();
-        lvContactos.getItems().addAll(listaContactos);
+        listViewContactos.getItems().clear();
+        listViewContactos.getItems().addAll(listaContactos);
     }
 
-    private void mostrarMensaje(String titulo, String mensaje) {
+    private Contacto buscarPorNombre(String nombre) {
+        for (Contacto c : listaContactos) {
+            if (c.getNombre().equalsIgnoreCase(nombre)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    private boolean validarEntradas() {
+        if (txtNombre.getText().trim().isEmpty()) {
+            mostrarAlerta("Validación", "El nombre no debe estar vacío.");
+            return false;
+        }
+        String telefono = txtTelefono.getText().trim();
+        if (telefono.isEmpty() || !telefono.matches("\\d{10}")) {
+            mostrarAlerta("Validación", "El teléfono debe tener exactamente 10 dígitos numéricos.");
+            return false;
+        }
+        if (cmbParentesco.getValue() == null) {
+            mostrarAlerta("Validación", "Debe seleccionar un parentesco.");
+            return false;
+        }
+        return true;
+    }
+
+    private void mostrarAlerta(String titulo, String mensaje) {
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
         alerta.setTitle(titulo);
         alerta.setHeaderText(null);

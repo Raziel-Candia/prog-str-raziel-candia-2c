@@ -11,16 +11,18 @@ public class Contacto {
         this.parentesco = parentesco;
     }
 
-    // Getters y Setters
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
+
     public String getTelefono() { return telefono; }
     public void setTelefono(String telefono) { this.telefono = telefono; }
+
     public String getParentesco() { return parentesco; }
     public void setParentesco(String parentesco) { this.parentesco = parentesco; }
 
     @Override
     public String toString() {
-        return String.format("Nombre: %s | Teléfono: %s | Parentesco: %s", nombre, telefono, parentesco);
+        return nombre + " - " + parentesco + " (" + telefono + ")";
     }
+
 }

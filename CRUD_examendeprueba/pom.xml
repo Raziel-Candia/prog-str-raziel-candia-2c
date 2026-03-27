@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>CRUD_examendeprueba</artifactId>
+    <artifactId>CRUD_Examendeprueba</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>CRUD_examendeprueba</name>
+    <name>CRUD_Examendeprueba</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
